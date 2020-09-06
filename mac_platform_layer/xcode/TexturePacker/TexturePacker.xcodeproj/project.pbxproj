@@ -1,0 +1,121 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		AC03F7A724B95E8000A603C0 /* TexturePacker */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AC03F7A824B95E8000A603C0 /* Build configuration list for PBXAggregateTarget "TexturePacker" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = TexturePacker;
+			productName = TexturePacker;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXFileReference section */
+		AC03F7AB24B95EF600A603C0 /* mac_os_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = mac_os_main.mm; path = ../../mac_os_main.mm; sourceTree = "<group>"; };
+		AC03F7AC24B95F0000A603C0 /* texture_packer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = texture_packer.cpp; path = ../../../cross_platform/texture_packer.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AC03F7A024B95DF300A603C0 = {
+			isa = PBXGroup;
+			children = (
+				AC03F7AB24B95EF600A603C0 /* mac_os_main.mm */,
+				AC03F7AC24B95F0000A603C0 /* texture_packer.cpp */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		AC03F7A124B95DF300A603C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1150;
+				TargetAttributes = {
+					AC03F7A724B95E8000A603C0 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = AC03F7A424B95DF300A603C0 /* Build configuration list for PBXProject "TexturePacker" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC03F7A024B95DF300A603C0;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC03F7A724B95E8000A603C0 /* TexturePacker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		AC03F7A524B95DF300A603C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		AC03F7A624B95DF300A603C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		AC03F7A924B95E8000A603C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N79LQXAXD6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AC03F7AA24B95E8000A603C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N79LQXAXD6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC03F7A424B95DF300A603C0 /* Build configuration list for PBXProject "TexturePacker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC03F7A524B95DF300A603C0 /* Debug */,
+				AC03F7A624B95DF300A603C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC03F7A824B95E8000A603C0 /* Build configuration list for PBXAggregateTarget "TexturePacker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC03F7A924B95E8000A603C0 /* Debug */,
+				AC03F7AA24B95E8000A603C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC03F7A124B95DF300A603C0 /* Project object */;
+}
