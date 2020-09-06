@@ -4,13 +4,11 @@
     Platformer Texture Packer
     2020 Ted Bendixson
     Mooselutions, LLC
-
-    All Rights Reserved
 */
 
-#include "../../common/platform.h"
-#include "../../common/memory_arena.h"
-#include "../../common/platformer_texture_pack.h"
+#include "platform.h"
+#include "memory_arena.h"
+#include "texture_pack.h"
 
 struct read_file_result 
 {
@@ -48,7 +46,7 @@ struct texture_packer_memory
 };
 
 #include "texture_packer_input.h"
-#include "../../common/platformer_texture.h"
+#include "texture.h"
 
 struct texture_packer_state
 {

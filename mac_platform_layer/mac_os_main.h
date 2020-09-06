@@ -1,6 +1,6 @@
 /*
 
-   Platform Game Texture Packer
+   Texture Packer
    2020 Ted Bendixson
    Mooselutions, LLC
 
@@ -26,10 +26,6 @@ const unsigned short F5KeyCode = 0x60;
 const unsigned short F6KeyCode = 0x61;
 const unsigned short F7KeyCode = 0x62;
 
-#include "../../common/platformer_strings.h"
-#include "../../common/mac_platform/mac_file.h"
-
-/*
 #define MAC_MAX_FILENAME_SIZE 4096
 
 struct mac_app_path
@@ -45,4 +41,5 @@ struct mac_state
 	char ResourcesDirectory[MAC_MAX_FILENAME_SIZE];
 	int ResourcesDirectorySize;
 
-};*/
+};
+
