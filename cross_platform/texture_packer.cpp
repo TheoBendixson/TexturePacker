@@ -267,6 +267,7 @@ void UpdateAndRender(texture_packer_memory *Memory, texture_packer_input *Input,
         TextureStorage->SaveFileHeader->TextureWidth = 24;
         TextureStorage->SaveFileHeader->TextureHeight = 24;
         TextureStorage->SaveFileHeader->NumberOfTextures = TextureStorage->TexturePack.NumberOfTextures;
+        TextureStorage->SaveFileHeader->MaxTextures = 128;
         TextureStorage->SaveFileHeader->FileSize = TextureStorage->TextureDataArena.Used;
 
         uint8 *StartOfFileData = TextureStorage->TextureDataArena.Base;
