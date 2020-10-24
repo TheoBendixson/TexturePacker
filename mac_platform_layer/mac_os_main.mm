@@ -250,6 +250,17 @@ read_file_result PlatformReadEntireFile(char *Filename)
     return(Result);
 }
 
+@interface TexturePackerSavePanelDelegate: NSObject<NSOpenSavePanelDelegate>
+@end
+
+@implementation TexturePackerSavePanelDelegate 
+
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url {
+    return true;
+}
+
+@end
+
 bool32 PlatformWriteEntireFile(uint64 FileSize, void *Memory)
 {
     bool32 Result = false;
@@ -257,6 +268,9 @@ bool32 PlatformWriteEntireFile(uint64 FileSize, void *Memory)
     @autoreleasepool
     {
         NSSavePanel *SavePanel = [[[NSSavePanel alloc] init] autorelease];
+        TexturePackerSavePanelDelegate *SavePanelDelegate = [[[TexturePackerSavePanelDelegate alloc] init] 
+                                                               autorelease];
+        [SavePanel setDelegate: SavePanelDelegate];
         SavePanel.title = @"Save Game Texture";
         SavePanel.prompt = @"Save";
         SavePanel.canCreateDirectories = true;
