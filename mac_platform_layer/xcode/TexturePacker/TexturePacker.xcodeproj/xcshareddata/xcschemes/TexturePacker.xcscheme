@@ -42,7 +42,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         FilePath = "/Users/theodorebendixson1/AppDevelopment/PersonalProjects/GamePrototypes/Platformer/code/texture_packer/build/TexturePacker.app">
+         FilePath = "/Users/theodorebendixson1/AppDevelopment/PersonalProjects/GameTools/texture_packer/build/TexturePacker.app">
       </PathRunnable>
    </LaunchAction>
    <ProfileAction

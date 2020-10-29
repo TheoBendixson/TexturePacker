@@ -313,7 +313,7 @@ void UpdateAndRender(texture_packer_memory *Memory, texture_packer_input *Input,
     if (TextureStorage->TexturePack.NumberOfTextures > 0)
     {
         uint32 SelectedTextureRow = TexturePackerState->SelectedTexture/TexturesPerRow;
-        uint32 SelectedTextureColumn = (TexturePackerState->SelectedTexture - SelectedTextureRow);
+        uint32 SelectedTextureColumn = (TexturePackerState->SelectedTexture - SelectedTextureRow*TexturesPerRow);
 
         real32 SelectedTextureXOffset = TextureWidth*SelectedTextureColumn + TextureSpacing*SelectedTextureColumn - 0.5f*TextureSpacing;
         real32 SelectedTextureYOffset = TextureWidth*SelectedTextureRow + TextureSpacing*SelectedTextureRow - 0.5f*TextureSpacing;
