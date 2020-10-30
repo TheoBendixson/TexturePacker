@@ -19,7 +19,7 @@ LoadTexturesFromFile(texture_packer_texture_storage *TextureStorage, uint32 Numb
     texture_pack TexturePack = TextureStorage->TexturePack;
     TexturePack.NumberOfTextures = 0;
 
-    PlatfromClearAllTextures();
+    PlatformClearAllTextures();
 
     for (uint32 TextureIndex = 0; TextureIndex < NumberOfTextures; TextureIndex++)
     {
@@ -45,12 +45,18 @@ LoadTexturesFromFile(texture_packer_texture_storage *TextureStorage, uint32 Numb
     TextureStorage->TexturePack = TexturePack;
 }
 
+internal uint32 
+GetPixelCount(texture *Texture)
+{
+    return Texture->Width*Texture->Height;
+}
+
 internal void
 AddNewTextureOrReplaceAtCurrentIndex(texture *Texture, uint32 TextureIndex, texture_pack *TexturePack,
                                      uint32 *PixelBufferSource, texture_packer_texture_storage *TextureStorage, 
                                      texture_packer_render_commands *RenderCommands)
 {
-    uint32 PixelCount = Texture->Width*Texture->Height;
+    uint32 PixelCount = GetPixelCount(Texture);
 
     if (TexturePack->NumberOfTextures == TextureIndex)
     {
@@ -167,6 +173,47 @@ void UpdateAndRender(texture_packer_memory *Memory, texture_packer_input *Input,
         PlatformFreeFileMemory(ReadResult.Filename);
 
         TexturePackerState->ActionSlopFrames = ActionPauseFrames;
+    }
+
+    if (Input->Keyboard.D.EndedDown &&
+        TexturePackerState->ActionSlopFrames == 0)
+    {
+        texture_pack TexturePack = TextureStorage->TexturePack;
+        uint32 TextureIndex = TexturePackerState->SelectedTexture;
+
+        if (TexturePack.NumberOfTextures != TextureIndex)
+        {
+            // NOTE: (Ted)  Clear the memory for the previous textures.
+            uint32 RemovedCount = 0;
+
+            for (uint32 Index = TextureIndex;
+                 Index < TexturePack.NumberOfTextures;
+                 Index++)
+            {
+                texture Texture = TexturePack.Textures[TextureIndex];
+                uint32 PixelCount = GetPixelCount(&Texture);
+                uint32 *PixelBufferDest = (uint32*)Texture.Data;
+
+                for (uint32 PixelIndex = 0;
+                     PixelIndex < PixelCount; 
+                     PixelIndex++)
+                {
+                    *PixelBufferDest = 0;
+                }
+
+                TextureStorage->TextureDataArena.Used -= sizeof(uint32)*PixelCount;
+                RemovedCount++;
+            }
+
+            TexturePack.NumberOfTextures = TextureIndex;
+            RenderCommands->UniqueTextureCount = TextureIndex;
+
+            PlatformRemoveTexturesFromIndexToEnd(RemovedCount);
+        } 
+
+        TextureStorage->TexturePack = TexturePack;
+
+        TexturePackerState->ActionSlopFrames = 10;
     }
 
     if (Input->Keyboard.F1.EndedDown &&

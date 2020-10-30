@@ -29,7 +29,8 @@ void PlatformFreeFileMemory(void *Memory);
 
 void PlatformAddTexture(texture *Texture);
 void PlatformReplaceTextureAtIndex(texture *Texture, uint32 TextureIndex);
-void PlatfromClearAllTextures();
+void PlatformRemoveTexturesFromIndexToEnd(uint32 NumberOfTexturesToRemove);
+void PlatformClearAllTextures();
 
 read_file_result PlatformReadEntireFile(char *Filename);
 bool32 PlatformWriteEntireFile(uint64 FileSize, void *Memory);

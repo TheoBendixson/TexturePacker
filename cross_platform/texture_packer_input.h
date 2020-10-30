@@ -8,11 +8,12 @@ struct texture_packer_keyboard_input
 {
     union
     {
-        texture_packer_key_state Keys[12];
+        texture_packer_key_state Keys[13];
         struct
         {
             texture_packer_key_state A;
             texture_packer_key_state C;
+            texture_packer_key_state D;
             texture_packer_key_state S;
             texture_packer_key_state F;
             texture_packer_key_state H;

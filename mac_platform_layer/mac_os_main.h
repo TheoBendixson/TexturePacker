@@ -11,6 +11,7 @@
 
 const unsigned short AKeyCode = 0x00;
 const unsigned short CKeyCode = 0x08;
+const unsigned short DKeyCode = 0x02;
 const unsigned short SKeyCode = 0x01;
 const unsigned short FKeyCode = 0x03;
 const unsigned short HKeyCode = 0x04;

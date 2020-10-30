@@ -349,20 +349,19 @@ bool32 PlatformWriteEntireFile(uint64 FileSize, void *Memory)
     if (theEvent.keyCode == AKeyCode)
     {
         _KeyboardInputPtr->A.EndedDown = true;
-    }
-    else if (theEvent.keyCode == F1KeyCode)
+    } else if (theEvent.keyCode == DKeyCode)
+    {
+        _KeyboardInputPtr->D.EndedDown = true;
+    } else if (theEvent.keyCode == F1KeyCode)
     {
         _KeyboardInputPtr->F1.EndedDown = true;
-    }
-    else if (theEvent.keyCode == F2KeyCode)
+    } else if (theEvent.keyCode == F2KeyCode)
     {
         _KeyboardInputPtr->F2.EndedDown = true;
-    }
-    else if (theEvent.keyCode == HKeyCode)
+    } else if (theEvent.keyCode == HKeyCode)
     {
         _KeyboardInputPtr->H.EndedDown = true;
-    }
-    else if (theEvent.keyCode == LKeyCode)
+    } else if (theEvent.keyCode == LKeyCode)
     {
         _KeyboardInputPtr->L.EndedDown = true;
     }
@@ -373,20 +372,19 @@ bool32 PlatformWriteEntireFile(uint64 FileSize, void *Memory)
     if (theEvent.keyCode == AKeyCode)
     {
         _KeyboardInputPtr->A.EndedDown = false;
-    }
-    else if (theEvent.keyCode == F1KeyCode)
+    } else if (theEvent.keyCode == DKeyCode)
+    {
+        _KeyboardInputPtr->D.EndedDown = false;
+    } else if (theEvent.keyCode == F1KeyCode)
     {
         _KeyboardInputPtr->F1.EndedDown = false;
-    }
-    else if (theEvent.keyCode == F2KeyCode)
+    } else if (theEvent.keyCode == F2KeyCode)
     {
         _KeyboardInputPtr->F2.EndedDown = false;
-    }
-    else if (theEvent.keyCode == HKeyCode)
+    } else if (theEvent.keyCode == HKeyCode)
     {
         _KeyboardInputPtr->H.EndedDown = false;
-    }
-    else if (theEvent.keyCode == LKeyCode)
+    } else if (theEvent.keyCode == LKeyCode)
     {
         _KeyboardInputPtr->L.EndedDown = false;
     }
@@ -546,8 +544,7 @@ static const NSUInteger kMaxInflightBuffers = 3;
 @end
 
 global_variable MetalViewDelegate *ViewDelegate;
-
-void PlatfromClearAllTextures()
+void PlatformClearAllTextures()
 {
     NSMutableArray *BitmapTextures = [[NSMutableArray alloc] init];
     [ViewDelegate setBitmapTextures: BitmapTextures];
@@ -606,6 +603,16 @@ void PlatformReplaceTextureAtIndex(texture *Texture, uint32 TextureIndex)
                      mipmapLevel: 0
                        withBytes: (void *)Texture->Data 
                      bytesPerRow: BytesPerRow];
+}
+
+void PlatformRemoveTexturesFromIndexToEnd(uint32 NumberOfTexturesToRemove)
+{
+    for (uint32 TexturesRemoved = 0;
+         TexturesRemoved < NumberOfTexturesToRemove;
+         TexturesRemoved++)
+     {
+        [ViewDelegate.BitmapTextures removeLastObject];
+     }
 }
 
 internal void
