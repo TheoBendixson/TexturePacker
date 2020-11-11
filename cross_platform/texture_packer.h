@@ -35,6 +35,15 @@ void PlatformClearAllTextures();
 read_file_result PlatformReadEntireFile(char *Filename);
 bool32 PlatformWriteEntireFile(uint64 FileSize, void *Memory);
 
+struct texture_packer_temporary_storage_partition
+{
+    uint64 TextureStorageSize;
+    uint8 *TextureStorage;
+
+    uint64 FileReadResultSize;
+    uint8 *FileReadResult;
+};
+
 struct texture_packer_memory
 {
     bool32 IsInitialized;
@@ -44,6 +53,8 @@ struct texture_packer_memory
     // NOTE: (Ted)  This must be cleared to zero at startup!!!
     void *PermanentStorage;
     void *TemporaryStorage;
+
+    texture_packer_temporary_storage_partition TemporaryStoragePartition;
 };
 
 #include "texture_packer_input.h"

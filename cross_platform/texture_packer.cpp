@@ -94,14 +94,15 @@ void UpdateAndRender(texture_packer_memory *Memory, texture_packer_input *Input,
     Assert(sizeof(texture_packer_texture_storage) <= Memory->TemporaryStorageSize);
 
     texture_packer_state *TexturePackerState = (texture_packer_state *)Memory->PermanentStorage;
-    texture_packer_texture_storage *TextureStorage = (texture_packer_texture_storage *)Memory->TemporaryStorage;
+    texture_packer_texture_storage *TextureStorage = (texture_packer_texture_storage *)Memory->TemporaryStoragePartition.TextureStorage;
 
     if(!Memory->IsInitialized)
     {
         TexturePackerState->SelectedTexture = 0;
 
-        InitializeArena(&TextureStorage->TextureDataArena, Memory->TemporaryStorageSize - sizeof(texture_packer_texture_storage), 
-                        (uint8 *)Memory->TemporaryStorage + sizeof(texture_packer_texture_storage));
+        InitializeArena(&TextureStorage->TextureDataArena, 
+                        Memory->TemporaryStoragePartition.TextureStorageSize - sizeof(texture_packer_texture_storage), 
+                        (uint8 *)Memory->TemporaryStoragePartition.TextureStorage + sizeof(texture_packer_texture_storage));
 
         TextureStorage->SaveFileHeader = PushStruct(&TextureStorage->TextureDataArena, texture_pack_file_header_new);
 
@@ -226,8 +227,8 @@ void UpdateAndRender(texture_packer_memory *Memory, texture_packer_input *Input,
             texture_pack_type FileType = TexturePackTypeFromFilename(ReadResult.Filename);
 
             InitializeArena(&TextureStorage->TextureDataArena, 
-                            Memory->TemporaryStorageSize - sizeof(texture_packer_texture_storage), 
-                            (uint8 *)Memory->TemporaryStorage + sizeof(texture_packer_texture_storage));
+                            Memory->TemporaryStoragePartition.TextureStorageSize - sizeof(texture_packer_texture_storage), 
+                            (uint8 *)Memory->TemporaryStoragePartition.TextureStorage + sizeof(texture_packer_texture_storage));
                 
             if (FileType == TexturePackTypeLegacy)
             {

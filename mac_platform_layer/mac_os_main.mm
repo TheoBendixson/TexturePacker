@@ -170,23 +170,21 @@ char * ConvertAbsoluteURLToFileURL(NSURL *FileURL)
 
 }
 
+global_variable NSOpenPanel *OpenPanel;
+
 read_file_result PlatformOpenFileDialog()
 {
     read_file_result Result = {};
 
-    @autoreleasepool
-    {
-        NSOpenPanel *OpenPanel = [[[NSOpenPanel alloc] init] autorelease];
-        OpenPanel.canChooseFiles = true;
-        OpenPanel.canChooseDirectories = true;
-        OpenPanel.allowsMultipleSelection = false;
+    OpenPanel.canChooseFiles = true;
+    OpenPanel.canChooseDirectories = true;
+    OpenPanel.allowsMultipleSelection = false;
 
-        if ([OpenPanel runModal] == NSModalResponseOK)
-        {
-            NSURL *FileURL = [[OpenPanel URLs] objectAtIndex: 0];
-            char *LocalFilename = ConvertAbsoluteURLToFileURL(FileURL);
-            Result = MacReadEntireFileFromDialog(LocalFilename);
-        }
+    if ([OpenPanel runModal] == NSModalResponseOK)
+    {
+        NSURL *FileURL = [[OpenPanel URLs] objectAtIndex: 0];
+        char *LocalFilename = ConvertAbsoluteURLToFileURL(FileURL);
+        Result = MacReadEntireFileFromDialog(LocalFilename);
     }
 
     return (Result);
@@ -630,6 +628,8 @@ SetupAlphaBlendForRenderPipelineColorAttachment(MTLRenderPipelineColorAttachment
 
 int main(int argc, const char * argv[]) 
 {
+    OpenPanel = [[NSOpenPanel alloc] init];
+
     MainWindowDelegate *WindowDelegate = [[MainWindowDelegate alloc] init];
 
     NSRect ScreenRect = [[NSScreen mainScreen] frame];
@@ -819,6 +819,12 @@ int main(int argc, const char * argv[])
         [NSException raise: @"Temporary Memory Not Allocated"
                      format: @"Failed to allocate temporary storage"];
     }
+
+    uint64 PartitionSize = Megabytes(32);
+    TexturePackerMemory.TemporaryStoragePartition.TextureStorageSize = PartitionSize;
+    TexturePackerMemory.TemporaryStoragePartition.TextureStorage = (uint8 *)TexturePackerMemory.TemporaryStorage;
+    TexturePackerMemory.TemporaryStoragePartition.FileReadResultSize = PartitionSize;
+    TexturePackerMemory.TemporaryStoragePartition.FileReadResult = (uint8 *)(TexturePackerMemory.TemporaryStorage) + PartitionSize;
 
     ViewDelegate.TexturePackerMemory = TexturePackerMemory; 
     ViewDelegate.CommandQueue = CommandQueue;
